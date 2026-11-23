@@ -1,0 +1,16 @@
+{
+  "name": "xunye",
+  "version": "1.0.0",
+  "private": true,
+  "description": "寻页：移动阅读与创作平台，包含用户端、作者工作台和 Web 管理端",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test tests",
+    "check": "node --check server/app.js && node --check server/db.js && node --check public/app.js && node --check public/admin.js"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

@@ -1,0 +1,952 @@
+:root {
+  --admin-bg: #f2f1eb;
+  --sidebar: #17201f;
+  --sidebar-soft: #24302e;
+  --ink: #222927;
+  --muted: #7d827d;
+  --line: #e3e1d8;
+  --card: #fffefa;
+  --accent: #df7957;
+  --accent-soft: #fae5da;
+  --green: #4e8064;
+  --amber: #b07939;
+  --red: #b45248;
+  --blue: #54798d;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 1100px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background: var(--admin-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.admin-loading {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  align-content: center;
+  gap: 15px;
+  color: var(--muted);
+}
+
+.admin-logo {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 18px 18px 18px 5px;
+  color: #fff8eb;
+  background: var(--sidebar);
+  font-family: "Songti SC", serif;
+  font-size: 25px;
+  box-shadow: 0 15px 35px rgba(24, 32, 31, 0.2);
+}
+
+.admin-layout {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 248px 1fr;
+}
+
+.admin-sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  padding: 25px 16px 18px;
+  color: #f6f1e8;
+  background:
+    radial-gradient(circle at 10% 0, rgba(223, 121, 87, 0.2), transparent 18rem),
+    var(--sidebar);
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px 24px;
+}
+
+.admin-brand .admin-logo {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 13px 13px 13px 4px;
+  font-size: 18px;
+  box-shadow: none;
+}
+
+.admin-brand strong {
+  display: block;
+  font-family: "Songti SC", serif;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+}
+
+.admin-brand small {
+  display: block;
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+.admin-section-label {
+  padding: 13px 12px 8px;
+  color: rgba(255, 255, 255, 0.31);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.admin-nav {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-nav-item {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 31px 1fr auto;
+  gap: 9px;
+  align-items: center;
+  border: 0;
+  border-radius: 11px;
+  padding: 10px 11px;
+  color: rgba(255, 255, 255, 0.6);
+  background: transparent;
+  text-align: left;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.admin-nav-item:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-nav-item.active {
+  color: #fff;
+  background: var(--sidebar-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.admin-nav-icon {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-nav-item.active .admin-nav-icon {
+  color: #ffd0bf;
+  background: rgba(223, 121, 87, 0.15);
+}
+
+.admin-nav-item > span:nth-child(2) {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.nav-count {
+  min-width: 21px;
+  border-radius: 99px;
+  padding: 3px 6px;
+  color: #fff;
+  background: var(--accent);
+  font-size: 9px;
+  text-align: center;
+}
+
+.admin-sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 9px 0;
+}
+
+.admin-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-avatar {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(145deg, #485d58, #293a37);
+  font-family: "Songti SC", serif;
+  font-weight: 700;
+}
+
+.admin-user strong {
+  display: block;
+  font-size: 11px;
+}
+
+.admin-user small {
+  display: block;
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 9px;
+}
+
+.sidebar-exit {
+  margin-left: auto;
+  border: 0;
+  padding: 5px;
+  color: rgba(255, 255, 255, 0.42);
+  background: transparent;
+}
+
+.admin-main {
+  min-width: 0;
+}
+
+.admin-topbar {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 30px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(242, 241, 235, 0.88);
+  backdrop-filter: blur(15px);
+}
+
+.admin-topbar h1 {
+  margin: 0;
+  font-family: "Songti SC", serif;
+  font-size: 25px;
+}
+
+.admin-topbar p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.admin-button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 13px;
+  color: var(--ink);
+  background: var(--card);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-button:hover {
+  border-color: #c9c4b9;
+}
+
+.admin-button.primary {
+  color: #fff;
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 7px 15px rgba(223, 121, 87, 0.17);
+}
+
+.admin-button.dark {
+  color: #fff;
+  border-color: var(--sidebar);
+  background: var(--sidebar);
+}
+
+.admin-button.success {
+  color: #fff;
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.admin-button.danger {
+  color: var(--red);
+  border-color: #ebcac5;
+  background: #fdf5f3;
+}
+
+.admin-button.small {
+  min-height: 30px;
+  padding: 5px 9px;
+  border-radius: 8px;
+  font-size: 10px;
+}
+
+.admin-content {
+  padding: 24px 30px 45px;
+}
+
+.admin-page-enter {
+  animation: admin-page-in 260ms ease;
+}
+
+@keyframes admin-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+}
+
+.metric-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 18px;
+  background: var(--card);
+  box-shadow: 0 9px 25px rgba(55, 53, 46, 0.035);
+}
+
+.metric-card::after {
+  position: absolute;
+  top: -19px;
+  right: -18px;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: rgba(223, 121, 87, 0.06);
+  content: "";
+}
+
+.metric-label {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.metric-value {
+  display: block;
+  margin: 9px 0 5px;
+  font-family: Georgia, "Songti SC", serif;
+  font-size: 29px;
+  font-weight: 500;
+}
+
+.metric-note {
+  color: #9b9d96;
+  font-size: 9px;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 0.85fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.admin-card {
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 19px;
+  background: var(--card);
+  box-shadow: 0 9px 25px rgba(55, 53, 46, 0.035);
+}
+
+.admin-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 17px;
+}
+
+.admin-card-head h2 {
+  margin: 0;
+  font-family: "Songti SC", serif;
+  font-size: 18px;
+}
+
+.admin-card-head p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.chart {
+  display: flex;
+  height: 210px;
+  align-items: flex-end;
+  gap: 13px;
+  border-bottom: 1px solid var(--line);
+  padding: 18px 4px 0;
+}
+
+.chart-bar-wrap {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.chart-value {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.chart-bar {
+  width: 100%;
+  max-width: 42px;
+  min-height: 3px;
+  border-radius: 7px 7px 2px 2px;
+  background: linear-gradient(to top, #efb19b, var(--accent));
+  transition: height 300ms ease;
+}
+
+.chart-label {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.category-bar {
+  margin-bottom: 13px;
+}
+
+.category-bar-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 10px;
+}
+
+.category-bar-head span:last-child {
+  color: var(--muted);
+}
+
+.category-track {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #f0ede6;
+}
+
+.category-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.admin-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eeece6;
+  font-size: 10px;
+  vertical-align: middle;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.admin-table .primary-cell strong {
+  display: block;
+  font-size: 11px;
+}
+
+.admin-table .primary-cell small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.table-actions {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 99px;
+  padding: 4px 7px;
+  color: #6e6255;
+  background: #efede7;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.tag.published,
+.tag.active,
+.tag.paid {
+  color: #477155;
+  background: #e3efe5;
+}
+
+.tag.pending {
+  color: #9a681d;
+  background: #f7ebd3;
+}
+
+.tag.rejected,
+.tag.banned,
+.tag.hidden {
+  color: #a24d45;
+  background: #f6ded9;
+}
+
+.tag.draft {
+  color: #626d78;
+  background: #e9edf0;
+}
+
+.queue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+}
+
+.queue-column {
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 16px;
+  background: var(--card);
+}
+
+.queue-column h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 13px;
+  font-family: "Songti SC", serif;
+  font-size: 16px;
+}
+
+.queue-count {
+  display: grid;
+  min-width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 99px;
+  color: #fff;
+  background: var(--accent);
+  font-family: sans-serif;
+  font-size: 9px;
+}
+
+.review-item {
+  margin-bottom: 9px;
+  border: 1px solid #ece9e1;
+  border-radius: 11px;
+  padding: 11px;
+  background: #fdfcf8;
+}
+
+.review-item-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.review-item strong {
+  display: block;
+  font-size: 10px;
+}
+
+.review-item p {
+  display: -webkit-box;
+  margin: 6px 0 9px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.review-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.admin-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.admin-input,
+.admin-select,
+.admin-textarea {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 8px 10px;
+  outline: 0;
+  color: var(--ink);
+  background: #fffefa;
+  font-size: 10px;
+}
+
+.admin-textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.admin-input:focus,
+.admin-select:focus,
+.admin-textarea:focus {
+  border-color: rgba(223, 121, 87, 0.62);
+  box-shadow: 0 0 0 3px rgba(223, 121, 87, 0.08);
+}
+
+.admin-search {
+  max-width: 280px;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.config-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 13px;
+}
+
+.config-form .full {
+  grid-column: 1 / -1;
+}
+
+.config-field label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.config-list-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid #eeece6;
+  padding: 10px 0;
+  font-size: 10px;
+}
+
+.config-list-item:last-child {
+  border-bottom: 0;
+}
+
+.config-list-item strong {
+  display: block;
+  font-size: 10px;
+}
+
+.config-list-item small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.empty-admin {
+  display: grid;
+  place-items: center;
+  padding: 38px 20px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 10px;
+}
+
+.admin-modal-backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 30px;
+  background: rgba(22, 29, 28, 0.52);
+  backdrop-filter: blur(4px);
+}
+
+.admin-modal {
+  width: min(100%, 480px);
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 17px;
+  padding: 22px;
+  background: var(--card);
+  box-shadow: 0 25px 80px rgba(18, 23, 22, 0.3);
+  animation: modal-in 180ms ease;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(9px) scale(0.98);
+  }
+}
+
+.admin-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.admin-modal-head h2 {
+  margin: 0;
+  font-family: "Songti SC", serif;
+  font-size: 21px;
+}
+
+.admin-modal-head p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.modal-close {
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  font-size: 20px;
+}
+
+.admin-toast {
+  position: fixed;
+  z-index: 150;
+  top: 20px;
+  left: 50%;
+  display: grid;
+  width: min(90vw, 480px);
+  gap: 7px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.admin-toast-item {
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  background: var(--sidebar);
+  box-shadow: 0 14px 35px rgba(24, 32, 31, 0.2);
+  font-size: 10px;
+  text-align: center;
+  animation: modal-in 180ms ease;
+}
+
+.admin-toast-item.error {
+  background: var(--red);
+}
+
+.login-page {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 1.1fr 0.9fr;
+  background: #e9e6dd;
+}
+
+.login-visual {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 65px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 78% 22%, rgba(226, 130, 95, 0.33), transparent 22rem),
+    linear-gradient(150deg, #18211f, #3d3039);
+}
+
+.login-visual::before {
+  position: absolute;
+  top: 12%;
+  left: 10%;
+  color: rgba(255, 255, 255, 0.035);
+  content: "STORY";
+  font-family: Georgia, serif;
+  font-size: 14vw;
+  font-weight: 900;
+  letter-spacing: -0.09em;
+}
+
+.login-quote {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  margin: 0;
+  font-family: "Songti SC", serif;
+  font-size: 43px;
+  line-height: 1.35;
+}
+
+.login-sub {
+  position: relative;
+  z-index: 1;
+  margin: 19px 0 0;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.login-form-side {
+  display: grid;
+  place-items: center;
+  padding: 40px;
+  background: #f5f2ea;
+}
+
+.login-form-wrap {
+  width: min(100%, 370px);
+}
+
+.login-form-wrap .admin-logo {
+  margin-bottom: 28px;
+}
+
+.login-form-wrap h1 {
+  margin: 0;
+  font-family: "Songti SC", serif;
+  font-size: 33px;
+}
+
+.login-form-wrap > p {
+  margin: 9px 0 26px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.login-field {
+  margin-bottom: 13px;
+}
+
+.login-field label {
+  display: block;
+  margin-bottom: 6px;
+  color: #585f5b;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.login-field input {
+  width: 100%;
+  min-height: 45px;
+  border: 1px solid #ddd9d0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: 0;
+  background: #fff;
+  font-size: 12px;
+}
+
+.login-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(223, 121, 87, 0.09);
+}
+
+.demo-login {
+  margin-top: 17px;
+  border-top: 1px solid var(--line);
+  padding-top: 15px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.7;
+}
+
+@media (max-width: 1250px) {
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .queue-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

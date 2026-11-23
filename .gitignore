@@ -1,0 +1,16 @@
+node_modules/
+.runtime/
+release/windows-stage/
+release/windows-setup-stage/
+release/*.exe
+release/*.zip
+release/~*
+data/*.db
+data/*.db-*
+data/*.sqlite
+*.log
+.env
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
